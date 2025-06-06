@@ -2,7 +2,7 @@
 
 ![Status do Projeto](https://img.shields.io/badge/status-funcional-green)
 ![Ruby](https://img.shields.io/badge/Ruby-3.1.2-CC342D?logo=ruby)
-![Rails](https://img.shields.io/badge/Rails-7.0-CC0000?logo=rubyonrails)
+![Rails](https://img.shields.io/badge/Rails-8.0-CC0000?logo=rubyonrails)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?logo=vite)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-336791?logo=postgresql)
