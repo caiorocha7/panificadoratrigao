@@ -46,37 +46,36 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "dotenv-rails", "~> 3.1"
-
-# Gemfile
-
 # Para autenticação stateless e segura via JSON Web Tokens
 gem 'devise'
 gem 'devise-jwt'
 
-# Para autorização baseada em políticas (roles)
+# Para autorização baseada em políticas (roles) de forma limpa e escalável
 gem 'pundit'
 
-# Para serialização JSON de alta performance, seguindo o padrão JSON:API
-gem 'jsonapi-serializer'
+# Para serialização e formatação de respostas JSON de forma eficiente
+gem 'active_model_serializers'
 
-# Para habilitar requisições cross-origin (CORS) do nosso frontend
+# Para carregar variáveis de ambiente de um arquivo .env (segurança)
+gem 'dotenv-rails', groups: [:development, :test]
+
+# Para permitir requisições cross-origin do nosso frontend
 gem 'rack-cors'
 
+# Ambiente de desenvolvimento e testes
 group :development, :test do
-  # Framework de testes principal
+  # Framework de testes principal para BDD/TDD
   gem 'rspec-rails', '~> 6.1'
-  # Para gerar dados de teste (factories)
+  
+  # Para gerar dados de teste de forma desacoplada (factories)
   gem 'factory_bot_rails'
-  # Para dados de teste mais realistas
-  gem 'faker'
-  # Para limpar o banco de dados entre os testes
+  
+  # Para garantir um estado limpo do banco de dados entre os testes
   gem 'database_cleaner-active_record'
+  
   # Matchers para testes mais legíveis e expressivos
   gem 'shoulda-matchers'
-end
-
-group :development do
+  
   # Para análise de performance e detecção de queries N+1
   gem 'bullet'
 end

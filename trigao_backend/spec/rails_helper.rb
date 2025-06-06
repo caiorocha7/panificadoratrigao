@@ -5,8 +5,6 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'shoulda/matchers'
-require 'database_cleaner/active_record'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -64,28 +62,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-   # Configuração do Shoulda Matchers
-  Shoulda::Matchers.configure do |shoulda_config|
-    shoulda_config.integrate do |with|
-      with.test_framework :rspec
-      with.library :rails
-    end
-  end
-
-  # Inclui a sintaxe do FactoryBot (ex: create(:user) em vez de FactoryBot.create(:user))
-  config.include FactoryBot::Syntax::Methods
-
-  # Configuração do Database Cleaner para limpar o banco antes de cada suíte e usar
-  # a estratégia de transação (mais rápida) durante os testes.
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
 end
