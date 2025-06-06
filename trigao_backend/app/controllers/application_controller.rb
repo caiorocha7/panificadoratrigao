@@ -18,4 +18,10 @@ class ApplicationController < ActionController::API
       status: { code: 403, message: "Acesso Negado. #{error_message}" }
     }, status: :forbidden
   end
+  
+  def record_not_found(exception)
+    render json: {
+      status: { code: 404, message: "Recurso não encontrado. Verifique o ID fornecido." }
+    }, status: :not_found
+  end
 end
