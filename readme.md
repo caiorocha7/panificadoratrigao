@@ -216,4 +216,4 @@ Este projeto é uma base. Algumas ideias para futuras implementações são:
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
-Feito com ❤️ por [Seu Nome](https://github.com/caiorocha7).
+Feito com ❤️ por [Caio Rocha](https://github.com/caiorocha7).
