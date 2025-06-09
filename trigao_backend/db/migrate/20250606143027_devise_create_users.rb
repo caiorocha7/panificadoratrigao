@@ -14,6 +14,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       ## Rememberable
       t.datetime :remember_created_at
 
+      ## Enum de função do usuário (role)
+      t.integer :role, null: false, default: 0
+
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at

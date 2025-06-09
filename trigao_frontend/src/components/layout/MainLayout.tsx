@@ -1,14 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './Header';
+import Navbar from './Navbar';
 
-export const MainLayout: React.FC = () => {
+const MainLayout = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <main className="container mx-auto p-6">
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+      <main>
         <Outlet />
       </main>
     </div>
   );
 };
+
+export default MainLayout;

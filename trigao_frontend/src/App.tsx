@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import ProductList from './pages/ProductList';
+import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
-import { MainLayout } from './components/layout/MainLayout';
+import MainLayout from './components/layout/MainLayout';
 
 function App() {
   return (
@@ -10,11 +11,10 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
 
-        {/* Rotas protegidas agora usam o MainLayout */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Dashboard />} />
-            {/* Adicione outras rotas aqui, elas herdarão o layout */}
+            <Route path="/" element={<ProductList />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Route>
         </Route>
       </Routes>

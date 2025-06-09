@@ -1,17 +1,20 @@
+# app/controllers/application_controller.rb
 class ApplicationController < ActionController::API
+
   include Pundit::Authorization
 
-  # Força a autenticação do Devise para todos os controllers que herdam dele.
-  # Nenhuma ação será executada sem um token JWT válido, exceto se for explicitamente pulada.
   before_action :authenticate_user!
 
-  # Trata erros do Pundit com uma resposta JSON amigável e clara.
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
 
+  # MÉTODOS PRIVADOS (Acessíveis apenas dentro deste controller)
+  # Renderiza uma resposta JSON padronizada para erros de autorização (403 Forbidden).
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
+    # O uso de `t` (I18n) aqui é uma boa prática para mensagens de erro.
     error_message = t("#{policy_name}.#{exception.query}", scope: "pundit", default: :default)
     
     render json: {
@@ -19,6 +22,7 @@ class ApplicationController < ActionController::API
     }, status: :forbidden
   end
   
+  # Renderiza uma resposta JSON padronizada para erros de registro não encontrado (404 Not Found).
   def record_not_found(exception)
     render json: {
       status: { code: 404, message: "Recurso não encontrado. Verifique o ID fornecido." }

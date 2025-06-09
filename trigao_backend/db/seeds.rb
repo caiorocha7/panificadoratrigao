@@ -23,13 +23,13 @@ puts "==> Iniciando o script de Seed..."
 
 # Envolvemos toda a operação em uma transação para garantir a atomicidade.
 ActiveRecord::Base.transaction do
-  puts "\n[1/3] Limpando dados antigos de Produtos e Categorias..."
+  puts "\n[1/4] Limpando dados antigos de Produtos e Categorias..."
   # A ordem é importante para respeitar as chaves estrangeiras.
   Product.destroy_all
   Category.destroy_all
   puts "  - Dados antigos removidos."
 
-  puts "\n[2/3] Criando Categorias a partir do mapeamento..."
+  puts "\n[2/4] Criando Categorias a partir do mapeamento..."
   # Usamos um hash para acesso O(1) à categoria pelo ID do JSON.
   categories_map = {}
   CATEGORY_MAPPING.each do |id, attrs|
@@ -38,7 +38,7 @@ ActiveRecord::Base.transaction do
     puts "  - Categoria '#{category.name}' criada."
   end
 
-  puts "\n[3/3] Lendo JSON e populando Produtos..."
+  puts "\n[3/4] Lendo JSON e populando Produtos..."
   file_path = Rails.root.join('db', 'produtos-trigao.json')
   products_json = JSON.parse(File.read(file_path))
 
@@ -83,6 +83,25 @@ ActiveRecord::Base.transaction do
   puts "    > #{products_created} produtos CRIADOS."
   puts "    > #{products_updated} produtos ATUALIZADOS."
 
+
+  # --- Bloco de Criação de Usuários Adicionado ---
+  puts "\n[4/4] Criando usuários de teste..."
+  default_password = 'superseguro123'
+
+  User.find_or_create_by!(email: 'master@trigao.com') do |user|
+    user.password = default_password
+    user.password_confirmation = default_password
+    user.role = :master
+    puts "  - Usuário 'master@trigao.com' criado."
+  end
+
+  User.find_or_create_by!(email: 'caixa@trigao.com') do |user|
+    user.password = default_password
+    user.password_confirmation = default_password
+    user.role = :padrao
+    puts "  - Usuário 'caixa@trigao.com' criado."
+  end
+  # -----------------------------------------------
 end # Fim da transação
 
 puts "\n==> Seed concluído com sucesso! <="

@@ -78,4 +78,6 @@ group :development, :test do
   
   # Para análise de performance e detecção de queries N+1
   gem 'bullet'
+
+  gem 'pundit-matchers'
 end
